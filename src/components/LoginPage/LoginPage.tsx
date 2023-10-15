@@ -1,6 +1,5 @@
 import React from "react";
-import { User } from "../../entites/User";
-
+import { User } from "../../features/user/userSlice";
 interface LoginPageProps {
   email: string;
   users: User[];
