@@ -1,22 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
-  fetchUsers,
   selectUsers,
   selectError,
   selectLoading,
-  User,
 } from "../features/user/userSlice";
-import { AppDispatch } from "../store";
+import { User } from "../entities/User";
 
 const UserList: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
   const users = useSelector(selectUsers);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
