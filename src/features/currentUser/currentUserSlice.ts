@@ -1,5 +1,5 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
-import { User } from "../../entities/User";
+import { createSlice, createAction } from '@reduxjs/toolkit';
+import { User } from '../../entities/User';
 
 export interface CurrentUserState {
   currentUser: User | null;
@@ -11,10 +11,10 @@ const initialState: CurrentUserState = {
   error: false,
 };
 
-export const loginUser = createAction<User | null>("currentUser/loginUser");
+export const loginUser = createAction<User | null>('currentUser/loginUser');
 
 const currentUserSlice = createSlice({
-  name: "currentUser",
+  name: 'currentUser',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -26,7 +26,8 @@ const currentUserSlice = createSlice({
   },
 });
 
-export const selectCurrentUser = (state: { currentUser: CurrentUserState }) =>
-  state.currentUser.currentUser;
+export const selectCurrentUser = (state: { currentUser: CurrentUserState }) => state.currentUser.currentUser;
+
+export const selectLoginError = (state: { currentUser: CurrentUserState }) => state.currentUser.error;
 
 export default currentUserSlice.reducer;
