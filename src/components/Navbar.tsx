@@ -3,6 +3,7 @@ import { XMarkIcon, Bars3Icon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../features/currentUser/currentUserSlice';
+import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -40,9 +41,9 @@ const Navbar: React.FC = () => {
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
@@ -50,7 +51,7 @@ const Navbar: React.FC = () => {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
