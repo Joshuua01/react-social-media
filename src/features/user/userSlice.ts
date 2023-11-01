@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../../entities/IUser';
+import { IUser } from '../../entities/IUser';
 
 export interface UserState {
-  users: User[];
+  users: IUser[];
   loading: boolean;
   error: string | null;
 }

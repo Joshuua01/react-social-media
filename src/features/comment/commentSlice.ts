@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IComment } from '../../entities/IComment';
 
 export interface CommentState {
@@ -7,11 +7,19 @@ export interface CommentState {
   error: string | null;
 }
 
+export interface CommentRequest {
+  postId: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
 const initialState: CommentState = {
   comments: [],
   loading: false,
   error: null,
 };
+
 
 export const fetchComments = createAsyncThunk('comment/fetchComments', async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/comments');
@@ -22,7 +30,15 @@ export const fetchComments = createAsyncThunk('comment/fetchComments', async () 
 const commentSlice = createSlice({
   name: 'comment',
   initialState,
-  reducers: {},
+  reducers: {
+    addComment(state, action: PayloadAction<CommentRequest>) {
+      const newComment = {
+        ...action.payload,
+        id: state.comments.length + 1,
+      };
+      state.comments.push(newComment);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchComments.pending, (state) => {
@@ -40,5 +56,7 @@ const commentSlice = createSlice({
 });
 
 export const selectComments = (state: { comments: CommentState }) => state.comments.comments;
+
+export const { addComment } = commentSlice.actions;
 
 export default commentSlice.reducer;

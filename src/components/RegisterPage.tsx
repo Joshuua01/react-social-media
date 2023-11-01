@@ -20,7 +20,6 @@ const RegisterPage: React.FC = () => {
     if (!ifEmailTaken) {
       dispatch(registerUser({ email, name, username }));
       setEmailTakenError(false);
-      console.log('yes');
       navigate('/login');
     } else {
       setEmailTakenError(true);
