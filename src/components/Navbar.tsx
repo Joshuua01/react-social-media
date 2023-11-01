@@ -3,21 +3,32 @@ import { XMarkIcon, Bars3Icon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../features/currentUser/currentUserSlice';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Posts', href: '/posts', current: false },
-  { name: 'Pictures', href: '/pictures', current: false },
-  { name: 'Todos', href: '/login', current: false },
+  { name: 'Albums', href: '/albums', current: false },
+  { name: 'Todos', href: '/todos', current: false },
 ];
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
+function getCurrentNavigation(path: string, navigation: { name: string; href: string; current: boolean }[]) {
+  navigation.forEach((item) => {
+    if (item.href === path) {
+      item.current = true;
+    } else {
+      item.current = false;
+    }
+  });
+  return navigation;
+}
+
 const Navbar: React.FC = () => {
   const currentUser = useSelector(selectCurrentUser);
+  const path = useLocation().pathname;
 
   return (
     <Disclosure as='nav' className='bg-gray-800'>
@@ -40,7 +51,7 @@ const Navbar: React.FC = () => {
               <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
-                    {navigation.map((item) => (
+                    {getCurrentNavigation(path, navigation).map((item) => (
                       <Link
                         key={item.name}
                         to={item.href}

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../../entities/User';
+import { User } from '../../entities/IUser';
 
 export interface UserState {
   users: User[];

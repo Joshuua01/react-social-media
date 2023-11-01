@@ -1,5 +1,5 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { User } from '../../entities/User';
+import { User } from '../../entities/IUser';
 
 export interface CurrentUserState {
   currentUser: User | null;
