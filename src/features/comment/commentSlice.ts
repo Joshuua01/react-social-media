@@ -19,7 +19,6 @@ const initialState: CommentState = {
   error: null,
 };
 
-
 export const fetchComments = createAsyncThunk('comment/fetchComments', async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/comments');
   const data = await response.json();
@@ -34,7 +33,7 @@ const commentSlice = createSlice({
       const newComment = {
         ...action.payload,
         id: state.comments.length + 1,
-        name: 'I belive there should not be a field for comment name.'
+        name: 'I belive there should not be a field for comment name.',
       };
       state.comments.push(newComment);
     },

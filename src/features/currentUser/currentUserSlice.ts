@@ -11,7 +11,6 @@ const initialState: CurrentUserState = {
   error: false,
 };
 
-
 const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
@@ -25,12 +24,10 @@ const currentUserSlice = createSlice({
       state.currentUser = null;
     },
   },
-  extraReducers: {}
-  ,
+  extraReducers: {},
 });
 
 export const selectCurrentUser = (state: { currentUser: CurrentUserState }) => state.currentUser.currentUser;
-
 export const selectLoginError = (state: { currentUser: CurrentUserState }) => state.currentUser.error;
 
 export const { loginUser, logoutUser } = currentUserSlice.actions;

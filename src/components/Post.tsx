@@ -26,8 +26,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
   return (
     <div className='bg-gray-800 p-5 mt-6 w-7/12 rounded-md shadow-md'>
-      <h2 className='text-white font-medium p-4'>{creator?.name}</h2>
-      <div className='text-slate-400 p-4'>{post.title}</div>
+      <h2 className='text-white font-medium p-4'>{creator?.email}</h2>
+      <div className='text-slate-300 p-4 font-semibold'>{post.title}</div>
       <div className='text-slate-400 p-4'>{post.body}</div>
       <div className='text-slate-400 m-4 py-3 border-y-[1px] border-slate-300 border-opacity-40'>Comments: {comments.length}</div>
       <div className='text-slate-400 m-4 py-3 border-slate-300 border-opacity-40 flex flex-col'>
