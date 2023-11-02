@@ -30,6 +30,10 @@ const postSlice = createSlice({
       };
       state.posts.unshift(newPost);
     },
+    removePost: (state, action) => {
+      const index = state.posts.findIndex((post) => post.id === action.payload);
+      state.posts.splice(index, 1);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -49,6 +53,6 @@ const postSlice = createSlice({
 
 export const selectPosts = (state: { posts: PostState }) => state.posts.posts;
 
-export const { addPost } = postSlice.actions;
+export const { addPost, removePost } = postSlice.actions;
 
 export default postSlice.reducer;
