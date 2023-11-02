@@ -11,11 +11,11 @@ export const FeedPage: React.FC = () => {
   const posts = useSelector(selectPosts);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!currentUser) {
-  //     navigate('/login');
-  //   }
-  // });
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/login');
+    }
+  });
 
   return (
     <div className='min-h-screen min-w-screen bg-slate-900'>

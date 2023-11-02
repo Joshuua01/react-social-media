@@ -9,7 +9,6 @@ export interface CommentState {
 
 export interface CommentRequest {
   postId: number;
-  name: string;
   email: string;
   body: string;
 }
@@ -35,6 +34,7 @@ const commentSlice = createSlice({
       const newComment = {
         ...action.payload,
         id: state.comments.length + 1,
+        name: 'I belive there should not be a field for comment name.'
       };
       state.comments.push(newComment);
     },

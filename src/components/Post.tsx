@@ -14,6 +14,7 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ post }) => {
   const comments = useSelector(selectComments).filter((comment: IComment) => comment.postId === post.id);
+  const lastThreeComments = comments.slice(Math.max(comments.length - 3, 0));
   const creator = useSelector(selectUsers).find((user: IUser) => user.id === post.userId);
   const currentUser = useSelector(selectCurrentUser);
   const [comment, setComment] = useState('');
@@ -29,6 +30,14 @@ const Post: React.FC<PostProps> = ({ post }) => {
       <div className='text-slate-400 p-4'>{post.title}</div>
       <div className='text-slate-400 p-4'>{post.body}</div>
       <div className='text-slate-400 m-4 py-3 border-y-[1px] border-slate-300 border-opacity-40'>Comments: {comments.length}</div>
+      <div className='text-slate-400 m-4 py-3 border-slate-300 border-opacity-40 flex flex-col'>
+        {lastThreeComments.map((comment: IComment) => (
+          <div key={comment.id} className='flex flex-col mt-4'>
+            <div className='font-medium text-white'>{comment.email}</div>
+            <div className='text-slate-400'>{comment.body}</div>
+          </div>
+        ))}
+      </div>
       <div className='p-4 flex'>
         <div className='relative flex flex-grow items-stretch focus-within:z-10'>
           <input
@@ -38,6 +47,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
             placeholder='Write a comment...'
             required
             value={comment}
+            autoComplete='off'
             onChange={(e) => setComment(e.target.value)}
           />
           <button
