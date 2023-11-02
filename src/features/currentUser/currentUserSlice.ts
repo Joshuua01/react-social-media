@@ -1,8 +1,8 @@
-import { createSlice, createAction } from '@reduxjs/toolkit';
-import { User } from '../../entities/IUser';
+import { createSlice } from '@reduxjs/toolkit';
+import { IUser } from '../../entities/IUser';
 
 export interface CurrentUserState {
-  currentUser: User | null;
+  currentUser: IUser | null;
   error: boolean;
 }
 
@@ -11,23 +11,28 @@ const initialState: CurrentUserState = {
   error: false,
 };
 
-export const loginUser = createAction<User | null>('currentUser/loginUser');
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(loginUser, (state, action) => {
+  reducers: {
+    loginUser(state, action) {
       const user = action.payload;
       state.currentUser = user;
       state.error = false;
-    });
+    },
+    logoutUser(state) {
+      state.currentUser = null;
+    },
   },
+  extraReducers: {}
+  ,
 });
 
 export const selectCurrentUser = (state: { currentUser: CurrentUserState }) => state.currentUser.currentUser;
 
 export const selectLoginError = (state: { currentUser: CurrentUserState }) => state.currentUser.error;
+
+export const { loginUser, logoutUser } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

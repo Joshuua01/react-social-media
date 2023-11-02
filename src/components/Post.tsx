@@ -21,7 +21,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleCommentAdd = () => {
-    dispatch(addComment({ postId: post.id, body: comment, name: currentUser.name, email: currentUser.email }));
+    dispatch(addComment({ postId: post.id, body: comment, email: currentUser?.email || 'Anonymous' }));
   };
 
   return (

@@ -1,9 +1,11 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon, Bars3Icon } from '@heroicons/react/20/solid';
-import React, { Fragment } from 'react';
+import React, { Fragment, MouseEventHandler } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../features/currentUser/currentUserSlice';
+import { logoutUser, selectCurrentUser } from '../features/currentUser/currentUserSlice';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../tools/store';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -29,6 +31,12 @@ function getCurrentNavigation(path: string, navigation: { name: string; href: st
 const Navbar: React.FC = () => {
   const currentUser = useSelector(selectCurrentUser);
   const path = useLocation().pathname;
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleLogout: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    event.preventDefault();
+    dispatch(logoutUser());
+  };
 
   return (
     <Disclosure as='nav' className='bg-gray-800'>
@@ -96,14 +104,11 @@ const Navbar: React.FC = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a href='#' className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a href='#' className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
+                          <a
+                            href='#'
+                            onClick={handleLogout}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
                             Sign out
                           </a>
                         )}
