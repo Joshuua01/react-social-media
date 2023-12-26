@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IPost } from '../../entities/IPost';
 
+
 export interface PostState {
   posts: IPost[];
   loading: boolean;
