@@ -20,6 +20,16 @@ export const fetchPosts = createAsyncThunk('post/fetchPosts', async () => {
   return data;
 });
 
+const findHighestPostId = (posts: IPost[]) => {
+  let highestId = 0;
+  posts.forEach((post) => {
+    if (post.id > highestId) {
+      highestId = post.id;
+    }
+  });
+  return highestId;
+}
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -27,13 +37,17 @@ const postSlice = createSlice({
     addPost: (state, action) => {
       const newPost = {
         ...action.payload,
-        id: state.posts.length + 1,
+        id: findHighestPostId(state.posts) + 1,
       };
       state.posts.unshift(newPost);
     },
     removePost: (state, action) => {
       const index = state.posts.findIndex((post) => post.id === action.payload);
       state.posts.splice(index, 1);
+    },
+    editPost: (state, action) => {
+      const index = state.posts.findIndex((post) => post.id === action.payload.id);
+      state.posts[index] = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -54,6 +68,6 @@ const postSlice = createSlice({
 
 export const selectPosts = (state: { posts: PostState }) => state.posts.posts;
 
-export const { addPost, removePost } = postSlice.actions;
+export const { addPost, removePost, editPost } = postSlice.actions;
 
 export default postSlice.reducer;

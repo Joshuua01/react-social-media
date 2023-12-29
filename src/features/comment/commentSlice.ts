@@ -25,6 +25,16 @@ export const fetchComments = createAsyncThunk('comment/fetchComments', async () 
   return data;
 });
 
+const findHighestCommentId = (comments: IComment[]) => {
+  let highestId = 0;
+  comments.forEach((comment) => {
+    if (comment.id > highestId) {
+      highestId = comment.id;
+    }
+  });
+  return highestId;
+}
+
 const commentSlice = createSlice({
   name: 'comment',
   initialState,
@@ -32,7 +42,7 @@ const commentSlice = createSlice({
     addComment(state, action: PayloadAction<CommentRequest>) {
       const newComment = {
         ...action.payload,
-        id: state.comments.length + 1,
+        id: findHighestCommentId(state.comments) + 1,
         name: 'I belive there should not be a field for comment name.',
       };
       state.comments.push(newComment);
