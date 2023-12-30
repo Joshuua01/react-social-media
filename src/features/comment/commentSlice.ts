@@ -53,6 +53,10 @@ const commentSlice = createSlice({
     },
     removeCommentsByPostId(state, action: PayloadAction<number>) {
       state.comments = state.comments.filter((comment) => comment.postId !== action.payload);
+    },
+    editComment(state, action: PayloadAction<IComment>) {
+      const index = state.comments.findIndex((comment) => comment.id === action.payload.id);
+      state.comments[index] = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -73,6 +77,6 @@ const commentSlice = createSlice({
 
 export const selectComments = (state: { comments: CommentState }) => state.comments.comments;
 
-export const { addComment, removeComment, removeCommentsByPostId } = commentSlice.actions;
+export const { addComment, removeComment, removeCommentsByPostId, editComment } = commentSlice.actions;
 
 export default commentSlice.reducer;
