@@ -44,6 +44,7 @@ const Post: React.FC<PostProps> = ({ post, isPostPage }) => {
         email: currentUser?.email || "Anonymous",
       })
     );
+    setComment("");
   };
 
   const handlePostDelete = () => {
