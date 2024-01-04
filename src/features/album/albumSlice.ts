@@ -19,10 +19,31 @@ export const fetchAlbums = createAsyncThunk('album/fetchAlbums', async () => {
     return data;
 });
 
+const findHighestAlbumId = (albums: IAlbum[]) => {
+    let highestId = 0;
+    albums.forEach((album) => {
+        if (album.id > highestId) {
+            highestId = album.id;
+        }
+    });
+    return highestId;
+}
+
 const albumSlice = createSlice({
     name: 'album',
     initialState,
-    reducers: {},
+    reducers: {
+        addAlbum: (state, action) => {
+            const newAlbum = {
+                ...action.payload,
+                id: findHighestAlbumId(state.albums) + 1,
+            };
+            state.albums.push(newAlbum);
+        },
+        removeAlbum: (state, action) => {
+            state.albums = state.albums.filter((album) => album.id !== action.payload);
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAlbums.pending, (state) => {
@@ -40,5 +61,7 @@ const albumSlice = createSlice({
 });
 
 export const selectAlbums = (state: { albums: AlbumState }) => state.albums.albums;
+
+export const { addAlbum, removeAlbum } = albumSlice.actions;
 
 export default albumSlice.reducer;

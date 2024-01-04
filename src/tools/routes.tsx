@@ -5,6 +5,7 @@ import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
 import AlbumsPage from "../components/AlbumsPage";
 import PostPage from "../components/PostPage";
+import PicturesPage from "../components/PicturesPage";
 
 export const routes = createBrowserRouter([
   {
@@ -30,5 +31,9 @@ export const routes = createBrowserRouter([
   {
     path: "/posts",
     element: <PostPage />,
+  },
+  {
+    path: "/pictures",
+    element: <PicturesPage />,
   },
 ]);
