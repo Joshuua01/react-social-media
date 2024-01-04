@@ -38,11 +38,15 @@ const albumSlice = createSlice({
                 ...action.payload,
                 id: findHighestAlbumId(state.albums) + 1,
             };
-            state.albums.push(newAlbum);
+            state.albums.unshift(newAlbum);
         },
         removeAlbum: (state, action) => {
             state.albums = state.albums.filter((album) => album.id !== action.payload);
         },
+        editAlbum: (state, action) => {
+            const index = state.albums.findIndex((album) => album.id === action.payload.id);
+            state.albums[index] = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -62,6 +66,6 @@ const albumSlice = createSlice({
 
 export const selectAlbums = (state: { albums: AlbumState }) => state.albums.albums;
 
-export const { addAlbum, removeAlbum } = albumSlice.actions;
+export const { addAlbum, removeAlbum, editAlbum } = albumSlice.actions;
 
 export default albumSlice.reducer;

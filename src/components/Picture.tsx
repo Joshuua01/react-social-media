@@ -6,7 +6,7 @@ import { removePicture } from "../features/picture/pictureSlice";
 
 interface PictureProps {
   picture: IPicture;
-  albumOwnerId: number;
+  albumOwnerId: number | null;
 }
 
 const Picture: React.FC<PictureProps> = ({ picture, albumOwnerId }) => {

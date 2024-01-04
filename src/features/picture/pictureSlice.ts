@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IPicture } from "../../entities/IPicture";
 
 export interface PictureState {
@@ -43,6 +43,9 @@ const pictureSlice = createSlice({
         removePicture: (state, action) => {
             state.pictures = state.pictures.filter((picture) => picture.id !== action.payload);
         },
+        removePicturesByAlbumId: (state, action: PayloadAction<number>) => {
+            state.pictures = state.pictures.filter((picture) => picture.albumId !== action.payload);
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -62,6 +65,6 @@ const pictureSlice = createSlice({
 
 export const selectPictures = (state: { pictures: PictureState }) => state.pictures.pictures;
 
-export const { addPicture, removePicture } = pictureSlice.actions;
+export const { addPicture, removePicture, removePicturesByAlbumId } = pictureSlice.actions;
 
 export default pictureSlice.reducer;

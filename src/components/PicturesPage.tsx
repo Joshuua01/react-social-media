@@ -11,9 +11,11 @@ const PicturesPage: React.FC = () => {
     (picture) => picture.albumId === Number(urlParams.get("album"))
   );
 
-  const albumOwnerId = useSelector(selectAlbums).find(
+  const album = useSelector(selectAlbums).find(
     (album) => album.id === Number(urlParams.get("album"))
-  ).userId;
+  );
+
+  const albumOwnerId = album ? album.userId : null;
 
   return (
     <div className="min-h-screen min-w-screen bg-slate-900">
