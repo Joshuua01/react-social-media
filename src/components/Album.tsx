@@ -83,7 +83,7 @@ const Album: React.FC<AlbumProps> = ({ album }) => {
         <input
           type="text"
           id="title"
-          className=" border text-sm rounded-lg ring-1 ring-gray-600 focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+          className="border text-sm rounded-lg ring-1 ring-gray-600 focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
           placeholder="Edit post title..."
           required
           value={albumState.title}
