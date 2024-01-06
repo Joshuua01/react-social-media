@@ -6,6 +6,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import AlbumsPage from "../components/AlbumsPage";
 import PostPage from "../components/PostPage";
 import PicturesPage from "../components/PicturesPage";
+import TodosPage from "../components/TodosPage";
 
 export const routes = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const routes = createBrowserRouter([
   {
     path: "/pictures",
     element: <PicturesPage />,
+  },
+  {
+    path: "/todos",
+    element: <TodosPage />,
   },
 ]);
