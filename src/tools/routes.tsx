@@ -7,6 +7,7 @@ import AlbumsPage from "../components/AlbumsPage";
 import PostPage from "../components/PostPage";
 import PicturesPage from "../components/PicturesPage";
 import TodosPage from "../components/TodosPage";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const routes = createBrowserRouter([
   {
@@ -22,23 +23,28 @@ export const routes = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/",
-    element: <FeedPage />,
-  },
-  {
-    path: "/albums",
-    element: <AlbumsPage />,
-  },
-  {
-    path: "/posts",
-    element: <PostPage />,
-  },
-  {
-    path: "/pictures",
-    element: <PicturesPage />,
-  },
-  {
-    path: "/todos",
-    element: <TodosPage />,
+    element: <PrivateRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <FeedPage />,
+      },
+      {
+        path: "/albums",
+        element: <AlbumsPage />,
+      },
+      {
+        path: "/albums/:albumId",
+        element: <PicturesPage />,
+      },
+      {
+        path: "/posts/:postId",
+        element: <PostPage />,
+      },
+      {
+        path: "/todos",
+        element: <TodosPage />,
+      },
+    ],
   },
 ]);
