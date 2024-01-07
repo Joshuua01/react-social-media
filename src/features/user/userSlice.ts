@@ -25,6 +25,16 @@ export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
   return data;
 });
 
+const findHighestUserId = (users: IUser[]) => {
+  let highestId = 0;
+  users.forEach((user) => {
+    if (user.id > highestId) {
+      highestId = user.id;
+    }
+  });
+  return highestId;
+}
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -34,13 +44,21 @@ const userSlice = createSlice({
       if (!emailExists) {
         const newUser = {
           ...action.payload,
-          id: state.users.length + 1,
+          id: findHighestUserId(state.users) + 1,
         };
         state.users.push(newUser);
       } else {
         throw new Error('Email already exists!');
       }
     },
+    editUser: (state, action) => {
+      const userIndex = state.users.findIndex((user) => user.id === action.payload.id);
+      state.users[userIndex] = action.payload;
+    },
+    deleteUser: (state, action) => {
+      const index = state.users.findIndex((user) => user.id === action.payload);
+      state.users.splice(index, 1);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -62,6 +80,6 @@ export const selectUsers = (state: { users: UserState }) => state.users.users;
 export const selectLoading = (state: { users: UserState }) => state.users.loading;
 export const selectError = (state: { users: UserState }) => state.users.error;
 
-export const { registerUser } = userSlice.actions;
+export const { registerUser, editUser, deleteUser } = userSlice.actions;
 
 export default userSlice.reducer;

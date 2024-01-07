@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Your Profile
+                            <Link to={"/user"}> Your Profile </Link>
                           </div>
                         )}
                       </Menu.Item>

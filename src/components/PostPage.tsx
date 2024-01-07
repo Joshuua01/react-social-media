@@ -8,10 +8,9 @@ import Post from "./Post";
 
 const PostPage: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const post: IPost =
-    useSelector(selectPosts).find(
-      (post: IPost) => post.id === Number(urlParams.get("post"))
-    ) || null;
+  const post = useSelector(selectPosts).find(
+    (post: IPost) => post.id === Number(urlParams.get("post"))
+  );
 
   if (!post) {
     return <NotFoundPage />;
