@@ -35,11 +35,11 @@ export const routes = createBrowserRouter([
         element: <AlbumsPage />,
       },
       {
-        path: "/albums/:albumId",
+        path: "/pictures",
         element: <PicturesPage />,
       },
       {
-        path: "/posts/:postId",
+        path: "/posts",
         element: <PostPage />,
       },
       {

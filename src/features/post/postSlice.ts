@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IPost } from '../../entities/IPost';
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IPost } from "../../entities/IPost";
 
 export interface PostState {
   posts: IPost[];
@@ -14,8 +13,8 @@ const initialState: PostState = {
   error: null,
 };
 
-export const fetchPosts = createAsyncThunk('post/fetchPosts', async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
   const data = await response.json();
   return data;
 });
@@ -28,10 +27,10 @@ const findHighestPostId = (posts: IPost[]) => {
     }
   });
   return highestId;
-}
+};
 
 const postSlice = createSlice({
-  name: 'post',
+  name: "post",
   initialState,
   reducers: {
     addPost: (state, action) => {
@@ -46,9 +45,16 @@ const postSlice = createSlice({
       state.posts.splice(index, 1);
     },
     editPost: (state, action) => {
-      const index = state.posts.findIndex((post) => post.id === action.payload.id);
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id
+      );
       state.posts[index] = action.payload;
-    }
+    },
+    removePostsByUserId: (state, action) => {
+      state.posts = state.posts.filter(
+        (post) => post.userId !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,13 +67,14 @@ const postSlice = createSlice({
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Unknown error occured!';
+        state.error = action.error.message || "Unknown error occured!";
       });
   },
 });
 
 export const selectPosts = (state: { posts: PostState }) => state.posts.posts;
 
-export const { addPost, removePost, editPost } = postSlice.actions;
+export const { addPost, removePost, editPost, removePostsByUserId } =
+  postSlice.actions;
 
 export default postSlice.reducer;
