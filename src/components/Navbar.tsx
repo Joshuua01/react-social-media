@@ -9,6 +9,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../tools/store";
+import SearchBar from "./SearchBar";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -80,6 +81,7 @@ const Navbar: React.FC = () => {
                         {item.name}
                       </Link>
                     ))}
+                    <SearchBar />
                   </div>
                 </div>
               </div>

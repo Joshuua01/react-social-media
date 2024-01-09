@@ -9,6 +9,7 @@ import PicturesPage from "../components/PicturesPage";
 import TodosPage from "../components/TodosPage";
 import PrivateRoutes from "./PrivateRoutes";
 import UserPage from "../components/UserPage";
+import UserResourcesPage from "../components/UserResourcesPage";
 
 export const routes = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const routes = createBrowserRouter([
       {
         path: "/user",
         element: <UserPage />,
+      },
+      {
+        path: "/users",
+        element: <UserResourcesPage />,
       },
     ],
   },
