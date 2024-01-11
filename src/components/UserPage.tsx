@@ -9,19 +9,21 @@ import { deleteUser, editUser, selectUsers } from "../features/user/userSlice";
 import { AppDispatch } from "../tools/store";
 import Modal from "./Modal";
 import { removePostsByUserId } from "../features/post/postSlice";
-import { removeCommentsByUserId } from "../features/comment/commentSlice";
+import { removeCommentsByUserEmail } from "../features/comment/commentSlice";
 import {
   removeAlbumsByUserId,
   selectAlbums,
 } from "../features/album/albumSlice";
 import { removeTodosByUserId } from "../features/todo/todoSlice";
 import { removePicturesByAlbumId } from "../features/picture/pictureSlice";
+import { IAlbum } from "../entities/IAlbum";
+import { IUser } from "../entities/IUser";
 
 const UserPage: React.FC = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector(selectUsers).find(
-    (user) => user.id === currentUser?.id
+    (user: IUser) => user.id === currentUser?.id
   );
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -29,7 +31,7 @@ const UserPage: React.FC = () => {
     return null;
   }
   const userAlbums = useSelector(selectAlbums).filter(
-    (album) => album.userId === currentUser?.id
+    (album: IAlbum) => album.userId === currentUser?.id
   );
 
   const [userState, setUserState] = useState(user);
@@ -41,11 +43,11 @@ const UserPage: React.FC = () => {
 
   const handleUserDelete = () => {
     dispatch(removePostsByUserId(userState?.id));
-    dispatch(removeCommentsByUserId(userState?.id));
-    dispatch(removeAlbumsByUserId(userState?.id));
-    userAlbums.map((album) => {
+    dispatch(removeCommentsByUserEmail(userState?.email));
+    userAlbums.map((album: IAlbum) => {
       dispatch(removePicturesByAlbumId(album.id));
     });
+    dispatch(removeAlbumsByUserId(userState?.id));
     dispatch(removeTodosByUserId(userState?.id));
     dispatch(deleteUser(userState?.id));
     dispatch(logoutUser());

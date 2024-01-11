@@ -69,9 +69,9 @@ const commentSlice = createSlice({
       );
       state.comments[index] = action.payload;
     },
-    removeCommentsByUserId(state, action: PayloadAction<number>) {
+    removeCommentsByUserEmail(state, action: PayloadAction<string>) {
       state.comments = state.comments.filter(
-        (comment) => comment.postId !== action.payload
+        (comment) => comment.email !== action.payload
       );
     },
   },
@@ -99,7 +99,7 @@ export const {
   removeComment,
   removeCommentsByPostId,
   editComment,
-  removeCommentsByUserId,
+  removeCommentsByUserEmail,
 } = commentSlice.actions;
 
 export default commentSlice.reducer;

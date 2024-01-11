@@ -26,27 +26,27 @@ const UserResourcesPage: React.FC = () => {
     <div className="min-h-screen min-w-screen bg-slate-900">
       <Navbar />
       <div className="flex flex-col items-center justify-center w-full">
-        <div className="text-white">
+        <div className="text-white mt-5 font-semibold text-3xl">
           {user?.name} has {post.length} posts and {albums.length} albums
         </div>
-        <div>
+        <div className="mt-5 text-xl font-semibold text-center text-white">
           List of posts:
           {post.map((post) => (
             <div
               key={post.id}
-              className="text-white cursor-pointer"
+              className="text-white text-lg cursor-pointer font-light hover:text-indigo-300"
               onClick={() => navigation(`/posts/?post=${post.id}`)}
             >
               {post.title}
             </div>
           ))}
         </div>
-        <div>
+        <div className="mt-5 text-xl font-semibold text-center text-white">
           List of albums:
           {albums.map((album) => (
             <div
               key={album.id}
-              className="text-white cursor-pointer"
+              className="text-white text-lg cursor-pointer font-light"
               onClick={() => navigation(`/pictures/?album=${album.id}`)}
             >
               {album.title}
