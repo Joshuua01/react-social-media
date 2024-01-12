@@ -1,6 +1,6 @@
 # Social Media App
 
-An application created using React, React-Redux, React-Router and TypeScript.
+An application created using React, React-Redux, React-Router, TypeScript and TailwindCSS.
 
 Application is based on JsonPlaceholder api.
 
