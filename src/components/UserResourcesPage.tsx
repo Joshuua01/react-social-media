@@ -46,7 +46,7 @@ const UserResourcesPage: React.FC = () => {
           {albums.map((album) => (
             <div
               key={album.id}
-              className="text-white text-lg cursor-pointer font-light"
+              className="text-white text-lg cursor-pointer font-light hover:text-indigo-300"
               onClick={() => navigation(`/pictures/?album=${album.id}`)}
             >
               {album.title}

@@ -44,6 +44,7 @@ const PicturesPage: React.FC = () => {
         })
       );
       setImageUrl("");
+      setImageTitle("");
       setIsUploadedImage(false);
       if (inputFile.current && inputFile.current.value) {
         inputFile.current.value = "";
